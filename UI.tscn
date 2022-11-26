@@ -1,0 +1,46 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://assets/Ubuntu-Regular.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://scripts/UI.gd" type="Script" id=2]
+
+[sub_resource type="DynamicFont" id=2]
+size = 24
+font_data = ExtResource( 1 )
+
+[sub_resource type="Theme" id=1]
+default_font = SubResource( 2 )
+
+[node name="UI" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = SubResource( 1 )
+script = ExtResource( 2 )
+
+[node name="Overlay" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.619608, 0.592157, 0.592157, 0.294118 )
+
+[node name="PlayButton" type="Button" parent="Overlay"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -34.5
+margin_top = -17.0
+margin_right = 34.5
+margin_bottom = 17.0
+text = "PLAY"
+
+[node name="Label" type="Label" parent="Overlay"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -122.5
+margin_top = -14.0
+margin_right = 122.5
+margin_bottom = 14.0
+text = "All Bugs Exterminated"
+
+[connection signal="pressed" from="Overlay/PlayButton" to="." method="_on_Button_pressed"]

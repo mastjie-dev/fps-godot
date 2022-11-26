@@ -1,0 +1,199 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://scripts/Player.gd" type="Script" id=1]
+[ext_resource path="res://assets/target.png" type="Texture" id=2]
+[ext_resource path="res://assets/gun.glb" type="PackedScene" id=3]
+
+[sub_resource type="CapsuleShape" id=1]
+radius = 0.5
+
+[sub_resource type="Animation" id=5]
+resource_name = "Gundown"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:translation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0.232909, -1, -0.05 ), Vector3( 0.232909, -1.16479, 0.269274 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, -174.163, 0 ), Vector3( 14.3267, -173.975, 1.49608 ) ]
+}
+
+[sub_resource type="Animation" id=6]
+resource_name = "Gunup"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:translation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0.232909, -1.16479, 0.269274 ), Vector3( 0.232909, -1, -0.05 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 14.3267, -173.975, 1.49608 ), Vector3( 0, -174.163, 0 ) ]
+}
+
+[sub_resource type="Animation" id=3]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:translation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0.193003, -0.962772, -0.0790313 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0, -180, 0 ) ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "Recoil"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:translation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4 ),
+"transitions": PoolRealArray( 1, 0.392292, 1 ),
+"update": 0,
+"values": [ Vector3( 0.232909, -1, -0.05 ), Vector3( 0.232909, -1, -0.000516523 ), Vector3( 0.232909, -1, -0.05 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4 ),
+"transitions": PoolRealArray( 1, 0.392292, 1 ),
+"update": 0,
+"values": [ Vector3( 0, -174.163, 0 ), Vector3( -3.77331, -174.15, -0.386302 ), Vector3( 0, -174.163, 0 ) ]
+}
+
+[sub_resource type="BoxShape" id=4]
+extents = Vector3( 0.1, 0.1, 0.1 )
+
+[node name="Player" type="KinematicBody"]
+script = ExtResource( 1 )
+
+[node name="Body" type="CollisionShape" parent="."]
+transform = Transform( 0.5, 0, 0, 0, -2.18557e-08, 1, 0, -0.5, -4.37114e-08, 0, 0, 0 )
+shape = SubResource( 1 )
+
+[node name="Head" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.168977, 0 )
+
+[node name="MainRay" type="RayCast" parent="Head"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.620397, 0 )
+cast_to = Vector3( 0, 0, -20 )
+debug_shape_custom_color = Color( 0.694118, 0.12549, 0.952941, 1 )
+debug_shape_thickness = 5
+
+[node name="RightRay" type="RayCast" parent="Head"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.454409, 0.612736, 0 )
+cast_to = Vector3( 0, 0, -20 )
+debug_shape_custom_color = Color( 0.694118, 0.12549, 0.952941, 1 )
+debug_shape_thickness = 5
+
+[node name="LeftRay" type="RayCast" parent="Head"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.436549, 0.60904, 0 )
+cast_to = Vector3( 0, 0, -20 )
+debug_shape_custom_color = Color( 0.694118, 0.12549, 0.952941, 1 )
+debug_shape_thickness = 5
+
+[node name="TopRay" type="RayCast" parent="Head"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0654, 0 )
+cast_to = Vector3( 0, 0, -20 )
+debug_shape_custom_color = Color( 0.694118, 0.12549, 0.952941, 1 )
+debug_shape_thickness = 5
+
+[node name="BottomRay" type="RayCast" parent="Head"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.176278, 0 )
+cast_to = Vector3( 0, 0, -20 )
+debug_shape_custom_color = Color( 0.694118, 0.12549, 0.952941, 1 )
+debug_shape_thickness = 5
+
+[node name="Gun" parent="Head" instance=ExtResource( 3 )]
+transform = Transform( -1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0.193003, -0.962772, -0.0790313 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Head/Gun"]
+anims/Gundown = SubResource( 5 )
+anims/Gunup = SubResource( 6 )
+anims/RESET = SubResource( 3 )
+anims/Recoil = SubResource( 2 )
+
+[node name="Camera" type="Camera" parent="Head"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.624133, 0 )
+
+[node name="CenterContainer" type="CenterContainer" parent="Head/Camera"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+
+[node name="TextureRect" type="TextureRect" parent="Head/Camera/CenterContainer"]
+margin_left = 640.0
+margin_top = 360.0
+margin_right = 640.0
+margin_bottom = 360.0
+texture = ExtResource( 2 )
+expand = true
+stretch_mode = 4
+
+[node name="GunTip" type="Area" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.17864, 0.583151, -0.63336 )
+monitorable = false
+
+[node name="CollisionShape" type="CollisionShape" parent="GunTip"]
+shape = SubResource( 4 )
+
+[connection signal="animation_finished" from="Head/Gun/AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
+[connection signal="body_entered" from="GunTip" to="." method="_on_GunTip_body_entered"]
+[connection signal="body_exited" from="GunTip" to="." method="_on_GunTip_body_exited"]
